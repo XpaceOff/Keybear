@@ -1,0 +1,22 @@
+units:
+  # Proxy Spacing Variables
+  kx: cx
+  ky: cy
+  # Padding Variables
+  px: kx + 2
+  py: ky + 2
+points:
+  zones:
+    matrix:
+      columns:
+        outer:
+        pinky:
+        ring:
+        middle:
+        index:
+        inner:
+      rows:
+        mod:
+        bottom:
+        home:
+        top:
