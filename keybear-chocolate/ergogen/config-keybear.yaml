@@ -8,13 +8,24 @@ units:
 points:
   zones:
     matrix:
+      key:
+        padding: 19
+        spread: 19
       columns:
         outer:
+          rows.mod.skip: true
         pinky:
         ring:
+          key.stagger: ky * 0.4
         middle:
+          key:
+            stagger: ky * .17
         index:
+          key:
+            stagger: -(ky * 0.17)
         inner:
+          key:
+            stagger: -(ky * 0.17)
       rows:
         mod:
         bottom:
