@@ -15,6 +15,7 @@ points:
         outer:
           rows.mod.skip: true
         pinky:
+          key:
         ring:
           key.stagger: ky * 0.4
         middle:
@@ -24,10 +25,52 @@ points:
           key:
             stagger: -(ky * 0.17)
         inner:
+          rows.mod.skip: true
           key:
             stagger: -(ky * 0.17)
       rows:
-        mod:
+        #mod:
         bottom:
         home:
         top:
+    mod:
+      key:
+        padding: 20
+        spread: 20
+      anchor:
+        ref: matrix_ring_bottom
+        shift: [kx*0.5, -21]
+      columns:
+        opt:
+        ctrl:
+          key:
+            splay: -5
+            shift: [1, -1]
+        layer:
+          key:
+            splay: -6
+            shift: [2, -2]
+        space:
+          key:
+            splay: -9
+            height: 1.5kx
+            shift: [5, -1]
+        layer2:
+          key:
+            height: 1.5kx
+            #splay: -10
+            shift: [5, -13]
+      rows:
+        cluster:
+          #shift: [2.6kx, -15]
+          #splay: -10
+          #spread: 25
+  rotate: -15
+  #mirror: &mirror
+  #  ref: matrix_inner_top
+  #  distance: 4kx
+outlines:
+  raw:
+    - what: rectangle
+      where: true
+      size: [28, 26]
