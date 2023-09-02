@@ -13,8 +13,8 @@ points:
       anchor:
         shift: [175, -90]
       key:
-        padding: 19
-        spread: 19
+        spread: px-2.8
+        padding: py-1.8
       columns:
         outer:
           rows.mod.skip: true
@@ -144,6 +144,8 @@ pcbs:
           hotswap: true
           from: "{{column_net}}"
           to: "{{colrow}}"
+        adjust:
+          rotate: 180
       #diode
       promicro:
         what: promicro
