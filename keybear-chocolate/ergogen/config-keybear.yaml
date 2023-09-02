@@ -5,9 +5,13 @@ units:
   # Padding Variables
   px: kx + 4
   py: ky + 4
+  # promicro-area
+  chip_w: (kx*0.5) + 23
 points:
   zones:
     matrix:
+      anchor:
+        shift: [175, -90]
       key:
         padding: 19
         spread: 19
@@ -29,7 +33,6 @@ points:
           key:
             stagger: -(ky * 0.17)
       rows:
-        #mod:
         bottom:
         home:
         top:
@@ -79,7 +82,7 @@ outlines:
   plate:
     - what: polygon
       operation: stack
-      fillet: 3
+      fillet: 3 # <---- rounded edges
       points:
         # upper-left corner
         - ref: matrix_outer_top
@@ -95,13 +98,12 @@ outlines:
 
         # upper-right corner
         - ref: matrix_inner_top
-          shift: [0.5px, 0.5py]
-        
+          shift: [chip_w, 0.5py]
         # bottom-right corner
         - ref: matrix_inner_bottom
-          shift: [0.5px, 0.5py]
+          shift: [chip_w, 0.5py]
         - ref: matrix_inner_bottom
-          shift: [0.5px, -4]
+          shift: [chip_w, -4]
         - ref: mod_space_cluster
           shift: [0, 0.75py]
         - ref: mod_space_cluster
@@ -126,3 +128,28 @@ outlines:
     - name: plate
     - operation: subtract
       name: keys
+
+pcbs:
+  keybear:
+    outlines:
+      main:
+        outline: plate
+    footprints:
+      choc_hotswap:
+        what: choc
+        where: true
+        params:
+          keycaps: true
+          reverse: true
+          hotswap: true
+          from: "{{column_net}}"
+          to: "{{colrow}}"
+      #diode
+      promicro:
+        what: promicro
+        params:
+          orientation: "down"
+        where:
+          ref: matrix_inner_top
+          rotate: -90
+          shift: [px*0.95, -0.5*py]
