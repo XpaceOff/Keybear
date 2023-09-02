@@ -3,8 +3,8 @@ units:
   kx: cx
   ky: cy
   # Padding Variables
-  px: kx + 2
-  py: ky + 2
+  px: kx + 4
+  py: ky + 4
 points:
   zones:
     matrix:
@@ -69,8 +69,60 @@ points:
   #mirror: &mirror
   #  ref: matrix_inner_top
   #  distance: 4kx
+
 outlines:
-  raw:
+  keys:
     - what: rectangle
       where: true
-      size: [28, 26]
+      bound: false
+      size: [kx, ky]
+  plate:
+    - what: polygon
+      operation: stack
+      fillet: 3
+      points:
+        # upper-left corner
+        - ref: matrix_outer_top
+          shift: [-0.5px, 0.5py]
+
+        # upper-mid
+        - ref: matrix_ring_top
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_middle_top
+          shift: [-0.5px, 0.5py]
+        - ref: matrix_middle_top
+          shift: [0.5px, 0.5py]
+
+        # upper-right corner
+        - ref: matrix_inner_top
+          shift: [0.5px, 0.5py]
+        
+        # bottom-right corner
+        - ref: matrix_inner_bottom
+          shift: [0.5px, 0.5py]
+        - ref: matrix_inner_bottom
+          shift: [0.5px, -4]
+        - ref: mod_space_cluster
+          shift: [0, 0.75py]
+        - ref: mod_space_cluster
+          shift: [0.5px, 0.75py]
+        - ref: mod_layer2_cluster
+          shift: [0.5px, 0.75py]
+        - ref: mod_layer2_cluster
+          shift: [0.5px, -0.75py]
+        - ref: mod_layer2_cluster
+          shift: [-0.5px, -0.75py]
+        - ref: mod_space_cluster
+          shift: [-0.5px, -0.75py]
+
+        # bottom-mid 
+        - ref: mod_opt_cluster
+          shift: [-0.5px, -0.5py]
+        
+        # bottom-left corner
+        - ref: matrix_outer_bottom
+          shift: [-0.5px, -0.5py]
+  combo:
+    - name: plate
+    - operation: subtract
+      name: keys
