@@ -56,11 +56,13 @@ points:
         space:
           key:
             splay: -9
-            height: 1.5kx
+            width: 1.5kx
+            rotate: 90
             shift: [5, -1]
         layer2:
           key:
-            height: 1.5kx
+            width: 1.5kx
+            rotate: 90
             #splay: -10
             shift: [5, -13]
       rows:
@@ -82,7 +84,7 @@ outlines:
   plate:
     - what: polygon
       operation: stack
-      fillet: 3 # <---- rounded edges
+      fillet: 4 # <---- rounded edges
       points:
         # upper-left corner
         - ref: matrix_outer_top
@@ -99,27 +101,36 @@ outlines:
         # upper-right corner
         - ref: matrix_inner_top
           shift: [chip_w, 0.5py]
+
         # bottom-right corner
         - ref: matrix_inner_bottom
           shift: [chip_w, 0.5py]
         - ref: matrix_inner_bottom
-          shift: [chip_w, -4]
+          shift: [chip_w, -5]
         - ref: mod_space_cluster
-          shift: [0, 0.75py]
+          shift: [0.75px, 0]
         - ref: mod_space_cluster
-          shift: [0.5px, 0.75py]
+          shift: [0.75px, -0.5py]
         - ref: mod_layer2_cluster
-          shift: [0.5px, 0.75py]
+          shift: [0.75px, 0]
         - ref: mod_layer2_cluster
-          shift: [0.5px, -0.75py]
+          shift: [0.75px, -.5py]
         - ref: mod_layer2_cluster
-          shift: [-0.5px, -0.75py]
+          shift: [-0.75px, -.5py]
+        - ref: mod_layer2_cluster
+          shift: [-0.75px, .5py]
         - ref: mod_space_cluster
-          shift: [-0.5px, -0.75py]
-
+          shift: [-0.75px, 0]
+        - ref: mod_space_cluster
+          shift: [-0.75px, .5py]
+        
         # bottom-mid 
+        - ref: mod_layer_cluster
+          shift: [0, -0.55py]
+        - ref: mod_ctrl_cluster
+          shift: [0, -0.55py]
         - ref: mod_opt_cluster
-          shift: [-0.5px, -0.5py]
+          shift: [-0.5px, -0.55py]
         
         # bottom-left corner
         - ref: matrix_outer_bottom
@@ -146,7 +157,18 @@ pcbs:
           to: "{{colrow}}"
         adjust:
           rotate: 180
-      #diode
+      diode:
+        what: diode
+        where: true
+        params:
+          from: "{{colrow}}"
+          to: "{{row_net}}"
+        adjust:
+          rotate: 270
+          shift: [kx*0.45, 1.6]
+      # rgb:
+      #   what: rgb
+      #   where: true
       promicro:
         what: promicro
         params:
