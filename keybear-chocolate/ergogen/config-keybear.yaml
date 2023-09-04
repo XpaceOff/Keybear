@@ -11,7 +11,7 @@ points:
   zones:
     matrix:
       anchor:
-        shift: [175, -90] # test
+        shift: [150, -150] # [175, -90] 
       key:
         spread: px-2.8
         padding: py-1.8
@@ -70,7 +70,7 @@ points:
           #shift: [2.6kx, -15]
           #splay: -10
           #spread: 25
-  rotate: -15
+  # rotate: -15
   # mirror: &mirror
   #   ref: matrix_inner_top
   #   distance: 4kx
@@ -237,4 +237,4 @@ pcbs:
         where:
           ref: matrix_inner_top
           rotate: -90
-          shift: [px*0.95, -0.5*py]
+          shift: [px*0.95, -0.3*py]
