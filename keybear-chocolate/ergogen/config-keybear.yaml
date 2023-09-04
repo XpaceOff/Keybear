@@ -71,9 +71,9 @@ points:
           #splay: -10
           #spread: 25
   rotate: -15
-  #mirror: &mirror
-  #  ref: matrix_inner_top
-  #  distance: 4kx
+  # mirror: &mirror
+  #   ref: matrix_inner_top
+  #   distance: 4kx
 
 outlines:
   keys:
@@ -81,6 +81,7 @@ outlines:
       where: true
       bound: false
       size: [kx, ky]
+
   plate:
     - what: polygon
       operation: stack
@@ -123,7 +124,7 @@ outlines:
           shift: [-0.75px, 0]
         - ref: mod_space_cluster
           shift: [-0.75px, .5py]
-        
+
         # bottom-mid 
         - ref: mod_layer_cluster
           shift: [0, -0.55py]
@@ -135,6 +136,66 @@ outlines:
         # bottom-left corner
         - ref: matrix_outer_bottom
           shift: [-0.5px, -0.5py]
+
+# NOTE: this is the right plate outline. 
+# Uncomment if needed. If you do, remember to uncomment
+# the mirror section in points
+
+  # plate_right:
+  #   - what: polygon
+  #     operation: stack
+  #     fillet: 4 # <---- rounded edges
+  #     points:
+  #       # upper-left corner
+  #       - ref: mirror_matrix_outer_top
+  #         shift: [-0.5px, 0.5py]
+  #
+  #       # upper-mid
+  #       - ref: mirror_matrix_ring_top
+  #         shift: [-0.5px, 0.5py]
+  #       - ref: mirror_matrix_middle_top
+  #         shift: [-0.5px, 0.5py]
+  #       - ref: mirror_matrix_middle_top
+  #         shift: [0.5px, 0.5py]
+  #
+  #       # upper-right corner
+  #       - ref: mirror_matrix_inner_top
+  #         shift: [chip_w, 0.5py]
+  #
+  #       # bottom-right corner
+  #       - ref: mirror_matrix_inner_bottom
+  #         shift: [chip_w, 0.5py]
+  #       - ref: mirror_matrix_inner_bottom
+  #         shift: [chip_w, -5]
+  #       - ref: mirror_mod_space_cluster
+  #         shift: [0.75px, 0]
+  #       - ref: mirror_mod_space_cluster
+  #         shift: [0.75px, -0.5py]
+  #       - ref: mirror_mod_layer2_cluster
+  #         shift: [0.75px, 0]
+  #       - ref: mirror_mod_layer2_cluster
+  #         shift: [0.75px, -.5py]
+  #       - ref: mirror_mod_layer2_cluster
+  #         shift: [-0.75px, -.5py]
+  #       - ref: mirror_mod_layer2_cluster
+  #         shift: [-0.75px, .5py]
+  #       - ref: mirror_mod_space_cluster
+  #         shift: [-0.75px, 0]
+  #       - ref: mirror_mod_space_cluster
+  #         shift: [-0.75px, .5py]
+  #
+  #       # bottom-mid 
+  #       - ref: mirror_mod_layer_cluster
+  #         shift: [0, -0.55py]
+  #       - ref: mirror_mod_ctrl_cluster
+  #         shift: [0, -0.55py]
+  #       - ref: mirror_mod_opt_cluster
+  #         shift: [-0.5px, -0.55py]
+  #       
+  #       # bottom-left corner
+  #       - ref: mirror_matrix_outer_bottom
+  #         shift: [-0.5px, -0.5py]
+
   combo:
     - name: plate
     - operation: subtract
