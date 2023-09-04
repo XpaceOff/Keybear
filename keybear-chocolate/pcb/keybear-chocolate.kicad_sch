@@ -1120,6 +1120,9 @@
   (junction (at 250.19 104.14) (diameter 0) (color 0 0 0 0)
     (uuid a6a40c3b-2364-447d-a114-8fb0bd35e0d8)
   )
+  (junction (at 179.07 104.14) (diameter 0) (color 0 0 0 0)
+    (uuid a9861838-5300-4771-aabd-96c29fc1f47b)
+  )
   (junction (at 196.85 73.66) (diameter 0) (color 0 0 0 0)
     (uuid abb95c21-7340-4a54-8e5e-898cf2c02633)
   )
@@ -1173,6 +1176,9 @@
   )
   (junction (at 200.66 151.765) (diameter 0) (color 0 0 0 0)
     (uuid dd42c3e8-a83b-441d-a73d-87e70df7f0cf)
+  )
+  (junction (at 163.83 81.28) (diameter 0) (color 0 0 0 0)
+    (uuid f0629e5c-1663-4a82-994a-ca504c84efd4)
   )
   (junction (at 107.95 103.505) (diameter 0) (color 0 0 0 0)
     (uuid f13b164d-f1ed-4b50-984d-cc3b6479ee88)
@@ -1448,6 +1454,10 @@
     (stroke (width 0) (type default))
     (uuid 300f201f-4f37-4ee3-8fa3-02a6d413f260)
   )
+  (wire (pts (xy 179.07 101.6) (xy 179.07 104.14))
+    (stroke (width 0) (type default))
+    (uuid 30b0b49b-4897-4b9c-83b8-6f7ce024f4ef)
+  )
   (wire (pts (xy 130.81 182.88) (xy 115.57 182.88))
     (stroke (width 0) (type default))
     (uuid 30b154af-0cb9-40e4-8d4c-ea6402c3325f)
@@ -1463,6 +1473,10 @@
   (wire (pts (xy 118.11 166.37) (xy 120.65 166.37))
     (stroke (width 0) (type default))
     (uuid 31e91332-dfff-4203-9634-ed9532d9985a)
+  )
+  (wire (pts (xy 163.83 97.79) (xy 163.83 81.28))
+    (stroke (width 0) (type default))
+    (uuid 33c9249b-1e7a-4c92-a5f5-c626bd22cca5)
   )
   (wire (pts (xy 74.93 173.99) (xy 74.93 170.18))
     (stroke (width 0) (type default))
@@ -1676,6 +1690,10 @@
     (stroke (width 0) (type default))
     (uuid 5770958b-a034-4969-863b-ff566a4d60e9)
   )
+  (wire (pts (xy 179.07 104.14) (xy 196.85 104.14))
+    (stroke (width 0) (type default))
+    (uuid 58bc37c1-0e79-4cea-b77b-7132fcaee62e)
+  )
   (wire (pts (xy 138.43 90.17) (xy 146.05 90.17))
     (stroke (width 0) (type default))
     (uuid 5924a233-9947-4bd2-bd72-1ce0eaf9dd42)
@@ -1848,7 +1866,7 @@
     (stroke (width 0) (type default))
     (uuid 801540fc-49c2-4875-b401-fe2c5e1908d8)
   )
-  (wire (pts (xy 175.26 104.14) (xy 196.85 104.14))
+  (wire (pts (xy 175.26 104.14) (xy 179.07 104.14))
     (stroke (width 0) (type default))
     (uuid 8022dccf-052d-4ea2-88de-69065b094582)
   )
@@ -1871,6 +1889,10 @@
   (wire (pts (xy 87.63 93.345) (xy 87.63 98.425))
     (stroke (width 0) (type default))
     (uuid 82f9bd6c-0b87-4159-8e5a-012e6b278127)
+  )
+  (wire (pts (xy 165.1 97.79) (xy 163.83 97.79))
+    (stroke (width 0) (type default))
+    (uuid 84a0e5cc-b1a9-482e-9775-5115ec070995)
   )
   (wire (pts (xy 57.15 166.37) (xy 59.69 166.37))
     (stroke (width 0) (type default))
@@ -2248,6 +2270,10 @@
     (stroke (width 0) (type default))
     (uuid e304e8af-3959-43d3-867a-5b6f4f088bf5)
   )
+  (wire (pts (xy 176.53 93.98) (xy 179.07 93.98))
+    (stroke (width 0) (type default))
+    (uuid e4b562ad-3690-4410-a5c2-960ae27fd851)
+  )
   (wire (pts (xy 77.47 113.03) (xy 88.265 113.03))
     (stroke (width 0) (type default))
     (uuid e5293066-5728-4efc-9085-86a9c005daf8)
@@ -2459,6 +2485,13 @@
       (effects (font (size 1.27 1.27)) (justify left) hide)
     )
   )
+  (global_label "SW19A" (shape input) (at 165.1 97.79 0)
+    (effects (font (size 1.27 1.27)) (justify left))
+    (uuid 2f720351-19b8-4613-b927-abb4ab459fe1)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 165.1 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+  )
   (global_label "data" (shape input) (at 215.9 151.765 0) (fields_autoplaced)
     (effects (font (size 1.524 1.524)) (justify left))
     (uuid 339d1f0f-b62e-41cd-90d3-ac9501e37b8e)
@@ -2494,7 +2527,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "SW25B" (shape input) (at 57.15 78.74 0)
+  (global_label "SW19B" (shape input) (at 57.15 78.74 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid 530c2361-0b90-4ddc-a721-be830f6bf152)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 57.15 78.74 0)
@@ -2513,6 +2546,13 @@
     (uuid 5dda6f5f-1dd4-4162-96d3-0d0ba9098971)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 22.8124 49.53 0)
       (effects (font (size 1.27 1.27)) (justify right) hide)
+    )
+  )
+  (global_label "SW19B" (shape input) (at 176.53 93.98 180)
+    (effects (font (size 1.27 1.27)) (justify right))
+    (uuid 60d4f818-8306-404c-ae8d-7ec6ea434d46)
+    (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 176.53 93.98 0)
+      (effects (font (size 1.27 1.27)) hide)
     )
   )
   (global_label "ENCA" (shape input) (at 30.48 73.66 180)
@@ -2648,7 +2688,7 @@
       (effects (font (size 1.27 1.27)) (justify right) hide)
     )
   )
-  (global_label "SW25A" (shape input) (at 57.15 73.66 0)
+  (global_label "SW19A" (shape input) (at 57.15 73.66 0)
     (effects (font (size 1.27 1.27)) (justify left))
     (uuid e6b5bd21-ba1a-49be-9136-f8ce9447bf09)
     (property "Intersheetrefs" "${INTERSHEET_REFS}" (at 57.15 73.66 0)
@@ -3671,7 +3711,7 @@
   (symbol (lib_id "corne-chocolate-rescue:SW_PUSH-kbd") (at 242.57 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37a4)
-    (property "Reference" "SW22" (at 246.38 93.726 0)
+    (property "Reference" "SW23" (at 246.38 93.726 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_PUSH" (at 242.57 98.552 0)
@@ -3688,7 +3728,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "SW22") (unit 1)
+          (reference "SW23") (unit 1)
         )
       )
     )
@@ -3697,7 +3737,7 @@
   (symbol (lib_id "Device:D") (at 250.19 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37aa)
-    (property "Reference" "D21" (at 247.65 100.33 0)
+    (property "Reference" "D23" (at 247.65 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D" (at 252.73 100.33 0)
@@ -3714,7 +3754,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "D21") (unit 1)
+          (reference "D23") (unit 1)
         )
       )
     )
@@ -3723,7 +3763,7 @@
   (symbol (lib_id "corne-chocolate-rescue:SW_PUSH-kbd") (at 260.35 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37b0)
-    (property "Reference" "SW23" (at 264.16 93.726 0)
+    (property "Reference" "SW24" (at 264.16 93.726 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_PUSH" (at 260.35 98.552 0)
@@ -3740,7 +3780,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "SW23") (unit 1)
+          (reference "SW24") (unit 1)
         )
       )
     )
@@ -3749,7 +3789,7 @@
   (symbol (lib_id "Device:D") (at 267.97 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37b6)
-    (property "Reference" "D22" (at 265.43 100.33 0)
+    (property "Reference" "D24" (at 265.43 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D" (at 270.51 100.33 0)
@@ -3766,7 +3806,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "D22") (unit 1)
+          (reference "D24") (unit 1)
         )
       )
     )
@@ -3775,7 +3815,7 @@
   (symbol (lib_id "corne-chocolate-rescue:SW_PUSH-kbd") (at 224.79 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37ec)
-    (property "Reference" "SW21" (at 228.6 93.726 0)
+    (property "Reference" "SW22" (at 228.6 93.726 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_PUSH" (at 224.79 98.552 0)
@@ -3792,7 +3832,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "SW21") (unit 1)
+          (reference "SW22") (unit 1)
         )
       )
     )
@@ -3801,7 +3841,7 @@
   (symbol (lib_id "Device:D") (at 232.41 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 00000000-0000-0000-0000-00005a5e37f2)
-    (property "Reference" "D20" (at 229.87 100.33 0)
+    (property "Reference" "D22" (at 229.87 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D" (at 234.95 100.33 0)
@@ -3818,7 +3858,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "D20") (unit 1)
+          (reference "D22") (unit 1)
         )
       )
     )
@@ -5598,7 +5638,7 @@
   (symbol (lib_id "corne-chocolate-rescue:SW_PUSH-kbd") (at 189.23 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid 0e933a28-6ed8-4666-937d-44ce1a30d5d6)
-    (property "Reference" "SW19" (at 193.04 93.726 0)
+    (property "Reference" "SW20" (at 193.04 93.726 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_PUSH" (at 189.23 98.552 0)
@@ -5615,7 +5655,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "SW19") (unit 1)
+          (reference "SW20") (unit 1)
         )
       )
     )
@@ -5670,6 +5710,32 @@
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
           (reference "JP10") (unit 1)
+        )
+      )
+    )
+  )
+
+  (symbol (lib_id "Device:D") (at 179.07 97.79 90) (unit 1)
+    (in_bom yes) (on_board yes) (dnp no)
+    (uuid 82cf4ba8-7d08-4f92-88fa-a3e1d3054978)
+    (property "Reference" "D19" (at 176.53 97.79 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Value" "D" (at 181.61 97.79 0)
+      (effects (font (size 1.27 1.27)))
+    )
+    (property "Footprint" "kbd:D3_SMD" (at 179.07 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (property "Datasheet" "" (at 179.07 97.79 0)
+      (effects (font (size 1.27 1.27)) hide)
+    )
+    (pin "1" (uuid 494c17d8-25f7-439b-84f9-8e33e3fb35c4))
+    (pin "2" (uuid 211ed932-370f-4451-97ad-61df02a7b9a2))
+    (instances
+      (project "keybear-chocolate"
+        (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
+          (reference "D19") (unit 1)
         )
       )
     )
@@ -5738,7 +5804,7 @@
   (symbol (lib_id "Device:D") (at 214.63 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid bfbf8fce-74f2-4a0b-91c9-03a061d9a7cf)
-    (property "Reference" "D19" (at 212.09 100.33 0)
+    (property "Reference" "D21" (at 212.09 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D" (at 217.17 100.33 0)
@@ -5755,7 +5821,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "D19") (unit 1)
+          (reference "D21") (unit 1)
         )
       )
     )
@@ -5764,7 +5830,7 @@
   (symbol (lib_id "corne-chocolate-rescue:SW_PUSH-kbd") (at 207.01 96.52 0) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid cf0b8995-7e84-4352-a57f-bb5f3cfbea6f)
-    (property "Reference" "SW20" (at 210.82 93.726 0)
+    (property "Reference" "SW21" (at 210.82 93.726 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "SW_PUSH" (at 207.01 98.552 0)
@@ -5781,7 +5847,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "SW20") (unit 1)
+          (reference "SW21") (unit 1)
         )
       )
     )
@@ -5877,7 +5943,7 @@
   (symbol (lib_id "Device:D") (at 196.85 100.33 90) (unit 1)
     (in_bom yes) (on_board yes) (dnp no)
     (uuid fe06c642-d9a8-4c57-a11e-bad66dbbf860)
-    (property "Reference" "D23" (at 194.31 100.33 0)
+    (property "Reference" "D20" (at 194.31 100.33 0)
       (effects (font (size 1.27 1.27)))
     )
     (property "Value" "D" (at 199.39 100.33 0)
@@ -5894,7 +5960,7 @@
     (instances
       (project "keybear-chocolate"
         (path "/b2404ab0-025a-473e-9fbb-0abc932972cf"
-          (reference "D23") (unit 1)
+          (reference "D20") (unit 1)
         )
       )
     )
