@@ -238,3 +238,12 @@ pcbs:
           ref: matrix_inner_top
           rotate: -90
           shift: [px*0.95, -0.3*py]
+      # pcm12:
+      #   what: pcm12
+      #   where:
+      #     ref: matrix_inner_bottom
+      #     shift: [5, 5]
+      #   params:
+      #     reverse: true
+      #     from: "{{colrow}}"
+      #     to: "{{row_net}}"
