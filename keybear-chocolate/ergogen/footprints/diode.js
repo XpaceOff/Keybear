@@ -1,7 +1,11 @@
+// for future versions you might need to replace the next values:
+// p.rot => p.r
+// p.to.str => p.to
+// p.from.str => p.from
+
 module.exports = {
     params: {
         designator: 'D',
-        thru_hole: false,
         from: undefined,
         to: undefined
     },
