@@ -6035,7 +6035,7 @@
     (property "Value" "BATT" (at 22.86 170.18 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "kbd:StripLED_rev" (at 22.86 163.83 0)
+    (property "Footprint" "kbd:StripBATT_xo" (at 22.86 163.83 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 22.86 163.83 0)
