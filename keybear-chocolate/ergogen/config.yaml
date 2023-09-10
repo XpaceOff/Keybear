@@ -101,7 +101,7 @@ outlines:
 
         # upper-right corner
         - ref: matrix_inner_top
-          shift: [chip_w, 0.5py]
+          shift: [chip_w, 0.6py]
 
         # bottom-right corner
         - ref: matrix_inner_bottom
