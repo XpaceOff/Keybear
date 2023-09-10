@@ -5393,7 +5393,7 @@
     (property "Value" "LED" (at 25.4 191.77 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "kbd:StripLED_rev" (at 25.4 185.42 0)
+    (property "Footprint" "kbd:StripLED_xo" (at 25.4 185.42 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at 25.4 185.42 0)
