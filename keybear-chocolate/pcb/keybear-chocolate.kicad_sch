@@ -5957,7 +5957,7 @@
     (property "Value" "BATT_SW" (at 100.33 54.61 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "Button_Switch_SMD:SW_SPDT_PCM12" (at 100.33 59.69 0)
+    (property "Footprint" "kbd:SW_SPDT_PCM12_2sides_xo" (at 100.33 59.69 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "~" (at 100.33 59.69 0)

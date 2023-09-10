@@ -30,7 +30,7 @@
   (fp_rect (start 1.016 -1.016) (end -1.016 3.556)
     (stroke (width 0.1) (type default)) (fill none) (layer "F.SilkS") (tstamp e19f7c9f-9120-4edb-b5ec-260519d480e8))
   (pad "1" smd rect (at 0 0) (size 1.524 1.524) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp 1097ee43-398b-46a6-99c6-384d1ab0f497))
+  (pad "1" smd rect (at 0 0) (size 1.524 1.524) (layers "B.Cu" "B.Paste" "B.Mask") (tstamp 88d8b81f-4c65-4575-b10b-1a95cf7c66ca))
   (pad "2" smd rect (at 0 2.54) (size 1.524 1.524) (layers "F.Cu" "F.Paste" "F.Mask") (tstamp ba8d69ed-476e-4ec7-9665-358d96759083))
   (pad "2" smd rect (at 0 2.54) (size 1.524 1.524) (layers "B.Cu" "B.Paste" "B.Mask") (tstamp ed8e8f25-a430-4da4-a54b-6eb8acd9ef0f))
-  (pad "3" smd rect (at 0 0) (size 1.524 1.524) (layers "B.Cu" "B.Paste" "B.Mask") (tstamp 88d8b81f-4c65-4575-b10b-1a95cf7c66ca))
 )
