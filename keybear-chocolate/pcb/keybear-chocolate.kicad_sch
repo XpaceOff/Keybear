@@ -2930,7 +2930,7 @@
     (property "Value" "D" (at 199.39 54.61 0)
       (effects (font (size 1.27 1.27)))
     )
-    (property "Footprint" "kbd:D3_SMD_v2" (at 196.85 54.61 0)
+    (property "Footprint" "kbd:D3_SMD" (at 196.85 54.61 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (at 196.85 54.61 0)
