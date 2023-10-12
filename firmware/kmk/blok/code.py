@@ -7,7 +7,7 @@ from kmk.extensions.RGB import RGB
 keyboard = KMKKeyboard()
 
 # Adding extensions
-rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=6, hue_default=190)
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=18, hue_default=190)
 
 # TODO Comment one of these on each side
 split_side = SplitSide.LEFT
