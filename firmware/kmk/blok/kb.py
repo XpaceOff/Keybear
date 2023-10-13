@@ -7,7 +7,8 @@ class KMKKeyboard(_KMKKeyboard):
     col_pins = (board.GP29, board.GP28, board.GP27, board.GP26, board.GP22, board.GP20,)
     row_pins = (board.GP05, board.GP06, board.GP07, board.GP08,)
     diode_orientation = DiodeOrientation.COLUMNS
-
+    encoder_pin_a = board.GP23 
+    encoder_pin_b = board.GP21
     rgb_pixel_pin = board.TX
 
     # flake8: noqa
