@@ -10,6 +10,7 @@ class KMKKeyboard(_KMKKeyboard):
     encoder_pin_a = board.GP23 
     encoder_pin_b = board.GP21
     rgb_pixel_pin = board.TX
+    data_pin = board.RX
 
     # flake8: noqa
     # fmt: off

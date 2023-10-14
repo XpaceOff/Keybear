@@ -7,19 +7,24 @@ from kmk.extensions.RGB import RGB
 
 keyboard = KMKKeyboard()
 
-# Adding extensions
-rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190)
-
 # TODO Comment one of these on each side
-split_side = SplitSide.LEFT
-#split_side = SplitSide.RIGHT
-split = Split(split_type=SplitType.BLE, split_side=split_side)
-
+# split_side = SplitSide.LEFT
+# split_side = SplitSide.RIGHT
+split = Split(
+    split_flip=True,
+    split_type=SplitType.UART,
+    # split_side=split_side,
+    data_pin=keyboard.data_pin,
+    use_pio=True,
+)
 keyboard.modules.append(split)
-keyboard.extensions.append(rgb)
 
 encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
+
+# Adding extensions
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190)
+keyboard.extensions.append(rgb)
 
 keyboard.keymap = [
     [
