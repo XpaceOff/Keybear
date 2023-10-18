@@ -5,6 +5,7 @@ from kmk.modules.layers import Layers
 from kmk.modules.holdtap import HoldTap
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
+from kmk.modules.cg_swap import CgSwap
 from kmk.extensions.RGB import RGB
 
 keyboard = KMKKeyboard()
@@ -28,6 +29,10 @@ keyboard.modules.append(Layers())
 
 encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
+
+# GUI Swap
+cg_swap = CgSwap()
+keyboard.modules.append(cg_swap)
 
 # Adding extensions
 rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190)
@@ -63,7 +68,7 @@ keyboard.keymap = [
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
         KC.CLCK,   _______, _______, _______, _______, _______,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
         KC.LSFT,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
-        KC.LGUI,   KC.LCTL, DFT_L,   KC.SPC,  XXXXXXX, ENC_LB0,             ENC_RB0, XXXXXXX, KC.ENTER,KC.X,     KC.RALT, KC.X,
+        KC.LGUI,   KC.LCTL, DFT_L,   KC.SPC,  XXXXXXX, KC.CG_TOGG,          ENC_RB0, XXXXXXX, KC.ENTER,KC.X,     KC.RALT, KC.X,
     ]
 ]
 
