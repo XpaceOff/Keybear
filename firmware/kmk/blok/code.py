@@ -41,34 +41,38 @@ keyboard.extensions.append(rgb)
 # Cleaner key names
 _______ = KC.TRNS
 XXXXXXX = KC.NO
+TBD_KEY = KC.NO # This key will be removed next hardware update.
 
-DFT_L = KC.TO(0)                    # Default Layer 
-DFT_SL = KC.HT(KC.TO(0), KC.LSFT)   # Default Shift Layer
-LRS_SL = KC.HT(KC.TG(1), KC.LSFT)   # Lower Shift Layer
+DFT_L = KC.TO(0)                    # Default Layer: set default layer. 
+DFT_SL = KC.HT(KC.TO(0), KC.LSFT)   # Default Shift Layer: Shift when pressed, and set default layer when tapped.
+LRS_SL = KC.HT(KC.TG(1), KC.LSFT)   # Lower Shift Layer: Shift when pressed, and set lower layer when tapped.
 RSE_L = KC.MO(2)
 
 ENC_LB0 = KC.RGB_MODE_SWIRL # Encoder Left Button
 ENC_LB1 = KC.RGB_VAD        # Encoder Left Button
 ENC_RB0 = KC.RGB_HUI        # Encoder Right Button
 
+# TODO: Update the 'ENC` encoder keys
+# TODO: Delete and clean anything related to TBD_KEY
+# TODO: The KC.CG_TOGG is temporary. I should move it to the config layer
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
         KC.CLCK,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
-        KC.LGUI,   KC.LCTL, LRS_SL,  KC.SPC,  XXXXXXX, ENC_LB0,             ENC_RB0, XXXXXXX, KC.ENTER,RSE_L,    KC.RALT, KC.X,
+        KC.LGUI,   KC.LCTL, LRS_SL,  KC.SPC,  TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, KC.ENTER,RSE_L,    KC.RALT, KC.X,
     ],
     [ # LOWER LAYER
         KC.TAB,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   KC.BSPC,\
-        KC.CLCK,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
-        KC.LSFT,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        KC.LGUI,   KC.LCTL, DFT_SL,  KC.SPC,  XXXXXXX, ENC_LB1,             ENC_RB0, XXXXXXX, KC.ENTER,DFT_L,    KC.RALT, KC.X,
+        _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
+        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, DFT_SL,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, DFT_L,    _______, KC.X,
     ],
     [ # RAISE LAYER
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
-        KC.CLCK,   _______, _______, _______, _______, _______,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
-        KC.LSFT,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
-        KC.LGUI,   KC.LCTL, DFT_L,   KC.SPC,  XXXXXXX, KC.CG_TOGG,          ENC_RB0, XXXXXXX, KC.ENTER,KC.X,     KC.RALT, KC.X,
+        _______,   _______, _______, _______, _______, _______,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
+        _______,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
+        _______,   _______, DFT_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
     ]
 ]
 
