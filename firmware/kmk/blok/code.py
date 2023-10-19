@@ -35,7 +35,7 @@ cg_swap = CgSwap()
 keyboard.modules.append(cg_swap)
 
 # Adding extensions
-rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190)
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190, val_default=100)
 keyboard.extensions.append(rgb)
 
 # Cleaner key names
@@ -47,6 +47,13 @@ DFT_L = KC.TO(0)                    # Default Layer: set default layer.
 DFT_SL = KC.HT(KC.TO(0), KC.LSFT)   # Default Shift Layer: Shift when pressed, and set default layer when tapped.
 LRS_SL = KC.HT(KC.TG(1), KC.LSFT)   # Lower Shift Layer: Shift when pressed, and set lower layer when tapped.
 RSE_L = KC.MO(2)
+CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
+
+RGB_TG = KC.RGB_TOG
+RGB_BU = KC.RGB_VAI # + Brightness
+RGB_BD = KC.RGB_VAD # - Brightness
+RGB_SU = KC.RGB_SAI # + Saturation
+RGB_SD = KC.RGB_SAD # - Saturation
 
 ENC_LB0 = KC.RGB_MODE_SWIRL # Encoder Left Button
 ENC_LB1 = KC.RGB_VAD        # Encoder Left Button
@@ -72,7 +79,13 @@ keyboard.keymap = [
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
         _______,   _______, _______, _______, _______, _______,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
         _______,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
-        _______,   _______, DFT_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
+        _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
+    ],
+    [ # CONFIG LAYER
+        _______,   _______, _______, _______, _______,  RGB_TG,            _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, RGB_SU,  RGB_TG,  KC.R,               _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, RGB_SD,  RGB_BD,  _______,            _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, XXXXXXX, _______, TBD_KEY, KC.CG_TOGG,         _______, _______, _______, _______,  _______, _______,\
     ]
 ]
 
