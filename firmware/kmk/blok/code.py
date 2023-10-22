@@ -6,12 +6,14 @@ from kmk.modules.holdtap import HoldTap
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
 from kmk.modules.cg_swap import CgSwap
+from kmk.modules.dynamic_sequences import DynamicSequences
 from kmk.extensions.rgb import RGB
 from kmk.extensions.lock_status import LockStatus
 
 # Some local variables
 n_key_layer = 14 
 n_key_capslock = 27
+rec_max_time = 60 * 1000 # 1 minute
 
 keyboard = KMKKeyboard()
 
@@ -72,6 +74,16 @@ encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, F
 cg_swap = CgSwap()
 keyboard.modules.append(cg_swap)
 
+# Record a sequence of keys.
+dynamicSequences = DynamicSequences(
+    timeout=rec_max_time, # Max time record. ms
+)
+
+keyboard.modules.append(dynamicSequences)
+RECORD = KC.RECORD_SEQUENCE()
+REC_STP = KC.STOP_SEQUENCE()
+REC_PLY = KC.PLAY_SEQUENCE()
+
 # Cleaner key names
 _______ = KC.TRNS
 XXXXXXX = KC.NO
@@ -119,7 +131,7 @@ keyboard.keymap = [
     ],
     [ # RAISE LAYER
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
-        _______,   _______, _______, _______, _______, _______,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
+        _______,   _______, _______, RECORD,  REC_STP, REC_PLY,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
         _______,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
         _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
     ],
