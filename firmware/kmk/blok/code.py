@@ -119,7 +119,7 @@ ENC_RB0 = KC.RGB_HUI        # Encoder Right Button
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
-        KC.CLCK,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
+        KC.CAPS,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
         KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPC,  TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, KC.ENTER,RSE_L,    KC.RALT, KC.X,
     ],
