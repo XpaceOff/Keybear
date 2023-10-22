@@ -10,7 +10,7 @@ from kmk.extensions.rgb import RGB
 
 keyboard = KMKKeyboard()
 
-#keyboard.debug_enabled = True
+# keyboard.debug_enabled = True
 
 # TODO Comment one of these on each side
 # split_side = SplitSide.LEFT
@@ -51,11 +51,18 @@ LRS_LS = KC.HT(KC.TG(1), KC.LSFT)   # Lower Layer&Shift: Shift when pressed, and
 RSE_L = KC.MO(2)                    # Raise Layer: set raise layer when pressed.
 CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
 
-RGB_TG = KC.RGB_TOG
-RGB_BU = KC.RGB_VAI # + Brightness
+RGB_TG = KC.RGB_TOG # Turn ON/OFF RGB.
+RGB_BI = KC.RGB_VAI # + Brightness
 RGB_BD = KC.RGB_VAD # - Brightness
-RGB_SU = KC.RGB_SAI # + Saturation
+RGB_SI = KC.RGB_SAI # + Saturation
 RGB_SD = KC.RGB_SAD # - Saturation
+RGB_HI = KC.RGB_HUI # + Hue
+RGB_HD = KC.RGB_HUD # - Hue
+RGB_PFX = KC.RGB_MODE_PLAIN
+RGB_BFX = KC.RGB_MODE_BREATHE
+RGB_RFX = KC.RGB_MODE_RAINBOW
+RGB_KFX = KC.RGB_MODE_KNIGHT
+RGB_SFX = KC.RGB_MODE_SWIRL
 
 ENC_LB0 = KC.RGB_MODE_SWIRL # Encoder Left Button
 ENC_LB1 = KC.RGB_VAD        # Encoder Left Button
@@ -84,9 +91,9 @@ keyboard.keymap = [
         _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
     ],
     [ # CONFIG LAYER
-        _______,   _______, _______, _______, _______, RGB_TG,              RGB_TG, _______, _______, _______,  _______, _______,\
-        _______,   _______, _______, RGB_SU,  RGB_BU,  KC.R,                _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, _______, RGB_SD,  RGB_BD,  _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, RGB_HI,  RGB_SI,  RGB_BI,  _______,             RGB_PFX, RGB_BFX, RGB_RFX, RGB_KFX,  RGB_SFX, _______,\
+        _______,   _______, RGB_HD,  RGB_SD,  RGB_BD,  RGB_TG,              RGB_TG,  _______, _______, _______,  _______, _______,\
         _______,   _______, XXXXXXX, _______, TBD_KEY, KC.CG_TOGG,          _______, _______, _______, _______,  _______, _______,\
     ]
 ]
