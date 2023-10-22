@@ -49,6 +49,7 @@ DFT_L = KC.TO(0)                    # Default Layer: set default layer.
 DFT_LS = KC.HT(KC.TO(0), KC.LSFT)   # Default Layer&Shift: Shift when pressed, and set default layer when tapped.
 LRS_LS = KC.HT(KC.TG(1), KC.LSFT)   # Lower Layer&Shift: Shift when pressed, and set lower layer when tapped.
 RSE_L = KC.MO(2)                    # Raise Layer: set raise layer when pressed.
+RD_LL = KC.HT(KC.TO(0), KC.MO(2))   # Raise & Default Layers: Set default layer when tapped, and set raise layer when pressed.
 CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
 
 RGB_TG = KC.RGB_TOG # Turn ON/OFF RGB.
@@ -82,7 +83,7 @@ keyboard.keymap = [
         KC.TAB,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   KC.BSPC,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, DFT_L,    _______, KC.X,
+        _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, RD_LL,    _______, KC.X,
     ],
     [ # RAISE LAYER
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
