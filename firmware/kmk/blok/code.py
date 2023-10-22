@@ -7,6 +7,11 @@ from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
 from kmk.modules.cg_swap import CgSwap
 from kmk.extensions.rgb import RGB
+from kmk.extensions.lock_status import LockStatus
+
+# Some local variables
+n_key_layer = 14 
+n_key_capslock = 27
 
 keyboard = KMKKeyboard()
 
@@ -35,9 +40,24 @@ class Layers(_Layers):
     def after_hid_send(self, keyboard):
         if keyboard.active_layers[0] != self.last_top_layer:
             self.last_top_layer = keyboard.active_layers[0]
-            print("Layer: ", self.last_top_layer, self.hues[self.last_top_layer])
-            rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, 14)
+            rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, n_key_layer)
             rgb.show()
+
+# React to Lock Status
+class LEDLockStatus(LockStatus):
+    def set_lock_leds(self):
+        if self.get_caps_lock():
+            rgb.set_hsv(100, 255, rgb.val, n_key_capslock)
+        else:
+            rgb.set_hsv(0, 0, 0, n_key_capslock)
+        rgb.show()
+
+    def after_hid_send(self, sandbox):
+        super().after_hid_send(sandbox)  # Critically important. Do not forget
+        if self.report_updated:
+            self.set_lock_leds()
+
+keyboard.extensions.append(LEDLockStatus())
 
 # HoldTap and Layers
 holdtap = HoldTap()
