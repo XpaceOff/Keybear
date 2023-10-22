@@ -1,7 +1,7 @@
 from kb import KMKKeyboard
 
 from kmk.keys import KC
-from kmk.modules.layers import Layers
+from kmk.modules.layers import Layers as _Layers
 from kmk.modules.holdtap import HoldTap
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
@@ -10,9 +10,9 @@ from kmk.extensions.rgb import RGB
 
 keyboard = KMKKeyboard()
 
-# keyboard.debug_enabled = True
+keyboard.debug_enabled = False
 
-# TODO Comment one of these on each side
+# TODO: Comment one of these on each side
 # split_side = SplitSide.LEFT
 # split_side = SplitSide.RIGHT
 split = Split(
@@ -24,21 +24,33 @@ split = Split(
 )
 keyboard.modules.append(split)
 
+# Adding RGB extension
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190, val_default=75)
+keyboard.extensions.append(rgb)
+
+class Layers(_Layers):
+    last_top_layer = 0
+    hues = (4, 20, 69, 100)
+
+    def after_hid_send(self, keyboard):
+        if keyboard.active_layers[0] != self.last_top_layer:
+            self.last_top_layer = keyboard.active_layers[0]
+            print("Layer: ", self.last_top_layer, self.hues[self.last_top_layer])
+            rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, 14)
+            rgb.show()
+
 # HoldTap and Layers
 holdtap = HoldTap()
 keyboard.modules.append(holdtap)
 keyboard.modules.append(Layers())
 
+# Encoder
 encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
 
 # GUI Swap
 cg_swap = CgSwap()
 keyboard.modules.append(cg_swap)
-
-# Adding extensions
-rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190, val_default=75)
-keyboard.extensions.append(rgb)
 
 # Cleaner key names
 _______ = KC.TRNS
