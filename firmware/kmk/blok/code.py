@@ -107,6 +107,7 @@ LRS_LS = KC.HT(KC.TG(1), KC.LSFT)   # Lower Layer&Shift: Shift when pressed, and
 RSE_L = KC.MO(2)                    # Raise Layer: set raise layer when pressed.
 RD_LL = KC.HT(KC.TO(0), KC.MO(2))   # Raise & Default Layers: Set default layer when tapped, and set raise layer when pressed.
 CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
+FUC_L = KC.MO(4)                    # Function Layer: set function layer when pressed
 
 RGB_TG = KC.RGB_TOG # Turn ON/OFF RGB.
 RGB_BI = KC.RGB_VAI # + Brightness
@@ -133,25 +134,31 @@ keyboard.keymap = [
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
         KC.CAPS,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
-        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPC,  TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, KC.ENTER,RSE_L,    KC.RALT, KC.X,
+        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPC,  TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, KC.ENTER,RSE_L,    KC.RALT, FUC_L,
     ],
     [ # LOWER LAYER
-        KC.TAB,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   KC.BSPC,\
+        KC.TAB,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, RD_LL,    _______, KC.X,
+        _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, RD_LL,    _______, _______,
     ],
     [ # RAISE LAYER
-        KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, KC.BSPC,\
+        KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, _______,\
         _______,   _______, _______, RECORD,  REC_STP, REC_PLY,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
         _______,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
-        _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, KC.X,
+        _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, _______,
     ],
     [ # CONFIG LAYER
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, RGB_HI,  RGB_SI,  RGB_BI,  _______,             RGB_PFX, RGB_BFX, RGB_RFX, RGB_KFX,  RGB_SFX, _______,\
         _______,   _______, RGB_HD,  RGB_SD,  RGB_BD,  RGB_TG,              RGB_TG,  _______, _______, _______,  _______, _______,\
         _______,   _______, XXXXXXX, _______, TBD_KEY, KC.CG_TOGG,          _______, _______, _______, _______,  _______, _______,\
+    ],
+    [ # FUNCTION LAYER
+        _______,   KC.F1,   KC.F2,   KC.F3,   KC.F4,   KC.F5,               KC.F6,   KC.F7,   KC.F8,   KC.F9,    KC.F10,  _______,\
+        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
     ]
 ]
 
