@@ -40,6 +40,18 @@ class Layers(_Layers):
     hues = (4, 20, 69, 100)
 
     def after_hid_send(self, keyboard):
+        # In the LOWER layer, I have numbers and arrow keys.
+        # When LOWER layer is selected, I would like go back to the DEFAULT layer
+        # if a non-number or arrow key is pressed
+        if keyboard.active_layers[0] == 1:
+            for nkey in keyboard.keys_pressed:
+                if not ((nkey.code >= 30 and nkey.code <= 39) or (nkey.code >= 79 and nkey.code <= 82)):
+                    # This is the code for KC.TO(layer)
+                    self._active_combo = None
+                    keyboard.active_layers.clear()
+                    keyboard.active_layers.insert(0, 0)
+                    break
+
         if keyboard.active_layers[0] != self.last_top_layer:
             self.last_top_layer = keyboard.active_layers[0]
             rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, n_key_layer)
