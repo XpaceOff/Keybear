@@ -2,7 +2,7 @@ from kb import KMKKeyboard
 
 from kmk.keys import KC
 from kmk.modules.layers import Layers as _Layers
-from kmk.modules.holdtap import HoldTap
+from kmk.modules.holdtap import HoldTap, HoldTapRepeat
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
 from kmk.modules.cg_swap import CgSwap
@@ -37,15 +37,17 @@ keyboard.extensions.append(rgb)
 
 class Layers(_Layers):
     last_top_layer = 0
-    hues = (4, 20, 69, 100)
+    hues = (10, 20, 69, 100, 180, 250, 35)
 
     def after_hid_send(self, keyboard):
         # In the LOWER layer, I have numbers and arrow keys.
         # When LOWER layer is selected, I would like go back to the DEFAULT layer
         # if a non-number or arrow key is pressed
+        # if a-z or ENTER
         if keyboard.active_layers[0] == 1:
             for nkey in keyboard.keys_pressed:
-                if not ((nkey.code >= 30 and nkey.code <= 39) or (nkey.code >= 79 and nkey.code <= 82)):
+                # if not ((nkey.code >= 30 and nkey.code <= 39) or (nkey.code >= 79 and nkey.code <= 82)):
+                if nkey.code >= 4 and nkey.code <= 29 or nkey.code == 40:
                     # This is the code for KC.TO(layer)
                     self._active_combo = None
                     keyboard.active_layers.clear()
@@ -109,6 +111,12 @@ RD_LL = KC.HT(KC.TO(0), KC.MO(2))   # Raise & Default Layers: Set default layer 
 CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
 FUC_L = KC.MO(4)                    # Function Layer: set function layer when pressed
 ARW_LE = KC.HT(KC.ENTER, KC.MO(5))
+KYP_LC = KC.HT(KC.CAPS, KC.MO(6))
+
+ALT_L = KC.RALT(KC.LEFT)
+ALT_R = KC.RALT(KC.RIGHT)
+ALT_U = KC.RALT(KC.UP)
+ALT_D = KC.RALT(KC.DOWN)
 
 RGB_TG = KC.RGB_TOG # Turn ON/OFF RGB.
 RGB_BI = KC.RGB_VAI # + Brightness
@@ -133,12 +141,12 @@ ENC_RB0 = KC.RGB_HUI        # Encoder Right Button
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
-        KC.CAPS,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
+        KYP_LC,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
-        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPC,  TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, ARW_LE,  RSE_L,    KC.RALT, FUC_L,
+        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPACE,TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, ARW_LE,RSE_L,    KC.RALT, FUC_L,
     ],
     [ # LOWER LAYER
-        KC.TAB,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
+        _______,   KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, RD_LL,    _______, _______,
@@ -161,11 +169,17 @@ keyboard.keymap = [
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
     ],
-    [ # ARROW LAYER
-        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+    [ # ARROW LAYER, NOTE: This might replace the LOWER layer
+        _______,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,              KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
+        _______,   _______, _______, _______, _______, _______,             ALT_L,   ALT_D,   ALT_U,   ALT_R,    _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+    ],
+    [ # KEYPAD LAYER
+        _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______, _______,             KC.N4,   KC.N5,   KC.N6,   XXXXXXX,  XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   XXXXXXX,  XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______, _______,             XXXXXXX, XXXXXXX, XXXXXXX, KC.N0,    XXXXXXX, XXXXXXX,\
     ]
 ]
 
