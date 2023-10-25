@@ -61,6 +61,7 @@ class Layers(_Layers):
 
 # React to Lock Status
 class LEDLockStatus(LockStatus):
+    first_boot = True
     def set_lock_leds(self):
         if self.get_caps_lock():
             rgb.set_hsv(100, 255, rgb.val, n_key_capslock)
@@ -69,6 +70,10 @@ class LEDLockStatus(LockStatus):
         rgb.show()
 
     def after_hid_send(self, sandbox):
+        if self.first_boot:
+            self.set_lock_leds()
+            self.first_boot = False
+
         super().after_hid_send(sandbox)  # Critically important. Do not forget
         if self.report_updated:
             self.set_lock_leds()
