@@ -36,6 +36,7 @@ rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190, val_
 keyboard.extensions.append(rgb)
 
 class Layers(_Layers):
+    first_boot = True
     last_top_layer = 0
     hues = (10, 20, 69, 100, 180, 250, 35)
 
@@ -54,7 +55,8 @@ class Layers(_Layers):
                     keyboard.active_layers.insert(0, 0)
                     break
 
-        if keyboard.active_layers[0] != self.last_top_layer:
+        if keyboard.active_layers[0] != self.last_top_layer or self.first_boot:
+            self.first_boot = False
             self.last_top_layer = keyboard.active_layers[0]
             rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, n_key_layer)
             rgb.show()
