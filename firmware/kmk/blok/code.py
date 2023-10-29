@@ -63,6 +63,8 @@ class Layers(_Layers):
             rgb.set_hsv(self.hues[self.last_top_layer], 255, rgb.val, n_key_layer)
             rgb.show()
 
+keyboard.modules.append(Layers())
+
 # React to Lock Status
 class LEDLockStatus(LockStatus):
     first_boot = True
@@ -104,10 +106,9 @@ class CgSwap(_CgSwap):
 cg_swap = CgSwap()
 keyboard.modules.append(cg_swap)
 
-# HoldTap and Layers
+# HoldTap
 holdtap = HoldTap()
 keyboard.modules.append(holdtap)
-keyboard.modules.append(Layers())
 
 # Encoder
 encoder_handler = EncoderHandler()
@@ -116,6 +117,7 @@ encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, F
 # Record a sequence of keys.
 dynamicSequences = DynamicSequences(
     timeout=rec_max_time, # Max time record. ms
+    # use_recorded_speed = True
 )
 
 keyboard.modules.append(dynamicSequences)
@@ -168,7 +170,7 @@ keyboard.keymap = [
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
         KYP_LC,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
-        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPACE,TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, ARW_LE,RSE_L,    KC.RALT, FUC_L,
+        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPACE,TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, ARW_LE,  RSE_L,    KC.RALT, FUC_L,
     ],
     [ # LOWER LAYER
         _______,   KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
