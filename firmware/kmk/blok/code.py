@@ -5,15 +5,17 @@ from kmk.modules.layers import Layers as _Layers
 from kmk.modules.holdtap import HoldTap, HoldTapRepeat
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
-from kmk.modules.cg_swap import CgSwap
+from kmk.modules.cg_swap import CgSwap as _CgSwap
 from kmk.modules.dynamic_sequences import DynamicSequences
 from kmk.extensions.rgb import RGB
 from kmk.extensions.lock_status import LockStatus
 
 # Some local variables
-n_key_layer = 14 
+n_key_layer = 14
+n_key_cgui = 22
 n_key_capslock = 27
 rec_max_time = 60 * 1000 # 1 minute
+cgui_hue_vals = [220, 15] # Hue values when cgswap is disabled/enabled [win/lin, mac]
 
 keyboard = KMKKeyboard()
 
@@ -43,7 +45,7 @@ class Layers(_Layers):
     def after_hid_send(self, keyboard):
         # In the LOWER layer, I have numbers and arrow keys.
         # When LOWER layer is selected, I would like go back to the DEFAULT layer
-        # if a non-number or arrow key is pressed
+        # ~~ if a non-number or arrow key is pressed ~~
         # if a-z or ENTER
         if keyboard.active_layers[0] == 1:
             for nkey in keyboard.keys_pressed:
@@ -82,6 +84,26 @@ class LEDLockStatus(LockStatus):
 
 keyboard.extensions.append(LEDLockStatus())
 
+# GUI Swap
+class CgSwap(_CgSwap):
+    last_swap_state = False
+    first_boot = True
+
+    def after_hid_send(self, keyboard):
+        if self.last_swap_state != self.cg_swap_enable or self.first_boot:
+            self.last_swap_state = self.cg_swap_enable
+            self.first_boot = False
+ 
+            this_hue = cgui_hue_vals[0]
+            if self.cg_swap_enable == True:
+                this_hue = cgui_hue_vals[1]
+
+            rgb.set_hsv(this_hue, 255, rgb.val, n_key_cgui)
+            rgb.show()
+
+cg_swap = CgSwap()
+keyboard.modules.append(cg_swap)
+
 # HoldTap and Layers
 holdtap = HoldTap()
 keyboard.modules.append(holdtap)
@@ -90,10 +112,6 @@ keyboard.modules.append(Layers())
 # Encoder
 encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
-
-# GUI Swap
-cg_swap = CgSwap()
-keyboard.modules.append(cg_swap)
 
 # Record a sequence of keys.
 dynamicSequences = DynamicSequences(
@@ -183,9 +201,9 @@ keyboard.keymap = [
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
     ],
     [ # KEYPAD LAYER
-        _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, _______,\
         _______,   _______, _______, _______, _______, _______,             KC.N4,   KC.N5,   KC.N6,   XXXXXXX,  XXXXXXX, XXXXXXX,\
-        _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   XXXXXXX,  XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   KC.DOT,   XXXXXXX, XXXXXXX,\
         _______,   _______, _______, _______, _______, _______,             XXXXXXX, XXXXXXX, XXXXXXX, KC.N0,    XXXXXXX, XXXXXXX,\
     ]
 ]
