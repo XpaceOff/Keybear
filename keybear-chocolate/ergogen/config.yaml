@@ -1,12 +1,12 @@
 units:
   # Proxy Spacing Variables
   kx: cx
-  ky: cy
+  ky: cy  
   # Padding Variables
   px: kx + 4
   py: ky + 4
   # promicro-area
-  chip_w: (kx*0.5) + 23
+  chip_w: (kx*0.5) + 22
 points:
   zones:
     matrix:
@@ -42,7 +42,7 @@ points:
         spread: 20
       anchor:
         ref: matrix_ring_bottom
-        shift: [kx*0.5, -21]
+        shift: [kx*0.5, -20]
       columns:
         opt:
         ctrl:
@@ -58,13 +58,7 @@ points:
             splay: -9
             width: 1.5kx
             rotate: 90
-            shift: [5, -1]
-        layer2:
-          key:
-            width: 1.5kx
-            rotate: 90
-            #splay: -10
-            shift: [5, -13]
+            shift: [5, -3]
       rows:
         cluster:
           #shift: [2.6kx, -15]
@@ -89,19 +83,19 @@ outlines:
       points:
         # upper-left corner
         - ref: matrix_outer_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.45px, 0.45py]
 
         # upper-mid
         - ref: matrix_ring_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.5px, 0.425py]
         - ref: matrix_middle_top
-          shift: [-0.5px, 0.5py]
+          shift: [-0.5px, 0.425py]
         - ref: matrix_middle_top
-          shift: [0.5px, 0.5py]
+          shift: [0.5px, 0.425py]
 
         # upper-right corner
         - ref: matrix_inner_top
-          shift: [chip_w, 0.6py]
+          shift: [chip_w, 0.55py]
 
         # bottom-right corner
         - ref: matrix_inner_bottom
@@ -111,31 +105,27 @@ outlines:
         - ref: mod_space_cluster
           shift: [0.75px, 0]
         - ref: mod_space_cluster
-          shift: [0.75px, -0.5py]
-        - ref: mod_layer2_cluster
-          shift: [0.75px, 0]
-        - ref: mod_layer2_cluster
-          shift: [0.75px, -.5py]
-        - ref: mod_layer2_cluster
-          shift: [-0.75px, -.5py]
-        - ref: mod_layer2_cluster
-          shift: [-0.75px, .5py]
+          shift: [0.6px, -0.5py]
         - ref: mod_space_cluster
-          shift: [-0.75px, 0]
+          shift: [0, -0.5py]
         - ref: mod_space_cluster
-          shift: [-0.75px, .5py]
+          shift: [-0.6px, -0.5py]
 
-        # bottom-mid 
+        # bottom-mid
         - ref: mod_layer_cluster
-          shift: [0, -0.55py]
+          shift: [0.5px, -0.6py]
+        - ref: mod_layer_cluster
+          shift: [0.4px, -0.45py]
+        - ref: mod_layer_cluster
+          shift: [0.1px, -0.425py]
         - ref: mod_ctrl_cluster
-          shift: [0, -0.55py]
+          shift: [0, -0.425py]
         - ref: mod_opt_cluster
-          shift: [-0.5px, -0.55py]
+          shift: [-0.5px, -0.425py]
         
         # bottom-left corner
         - ref: matrix_outer_bottom
-          shift: [-0.5px, -0.5py]
+          shift: [-0.45px, -0.45py]
 
 # NOTE: this is the right plate outline. 
 # Uncomment if needed. If you do, remember to uncomment
