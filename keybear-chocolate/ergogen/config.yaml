@@ -87,11 +87,11 @@ outlines:
 
         # upper-mid
         - ref: matrix_ring_top
-          shift: [-0.5px, 0.425py]
+          shift: [-0.5px, 0.45py]
         - ref: matrix_middle_top
-          shift: [-0.5px, 0.425py]
+          shift: [-0.5px, 0.46py]
         - ref: matrix_middle_top
-          shift: [0.5px, 0.425py]
+          shift: [0.5px, 0.46py]
 
         # upper-right corner
         - ref: matrix_inner_top
