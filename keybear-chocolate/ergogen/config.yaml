@@ -80,7 +80,7 @@ outlines:
     - what: rectangle
       where: true
       bound: false
-      size: [kx-3.6, ky-4]
+      size: [kx-4, ky-3]
 
   plate:
     - what: polygon
