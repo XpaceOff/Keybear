@@ -75,6 +75,12 @@ outlines:
       where: true
       bound: false
       size: [kx, ky]
+  
+  keyholes:
+    - what: rectangle
+      where: true
+      bound: false
+      size: [kx-3.6, ky-4]
 
   plate:
     - what: polygon
@@ -191,13 +197,14 @@ outlines:
   combo:
     - name: plate
     - operation: subtract
-      name: keys
+      name: keyholes
 
 pcbs:
   keybear:
     outlines:
       main:
-        outline: plate
+        outline: plate # enable this for pcb
+        # outline: combo # enable this for plate
     footprints:
       choc_hotswap:
         what: choc
