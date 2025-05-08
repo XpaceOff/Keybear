@@ -11,30 +11,31 @@ from kmk.extensions.rgb import RGB
 from kmk.extensions.lock_status import LockStatus
 
 # Some local variables
-n_key_layer = 14
-n_key_cgui = 22
-n_key_capslock = 27
+n_key_layer = 13
+n_key_cgui = 21
+n_key_capslock = 26
 rec_max_time = 60 * 1000 # 1 minute
 cgui_hue_vals = [220, 15] # Hue values when cgswap is disabled/enabled [win/lin, mac]
 
 keyboard = KMKKeyboard()
 
-keyboard.debug_enabled = False
-
 # TODO: Comment one of these on each side
 # split_side = SplitSide.LEFT
 # split_side = SplitSide.RIGHT
 split = Split(
-    split_flip=True,
-    split_type=SplitType.UART,
-    # split_side=split_side,
-    data_pin=keyboard.data_pin,
+    split_flip=True, # If both halves are the same, but flipped, set this True
+    split_side=split_side, # Sets if this is to SplitSide.LEFT or SplitSide.RIGHT, or use EE hands
+    split_type=SplitType.UART, # Defaults to UART
+    split_target_left=True,  # Assumes that left will be the one on USB. Set to False if it will be the right
+    uart_interval=20, # Sets the uarts delay. Lower numbers draw more power
+    data_pin=keyboard.data_pin_rx, # The primary data pin to talk to the secondary device with
+    data_pin2=keyboard.data_pin_tx, # Second uart pin to allow 2 way communication
+    uart_flip=True, # Reverses the RX and TX pins if both are provided
     use_pio=True,
 )
-keyboard.modules.append(split)
 
 # Adding RGB extension
-rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=29, hue_default=190, val_default=75)
+rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=28, hue_default=190, val_default=75)
 keyboard.extensions.append(rgb)
 
 class Layers(_Layers):
@@ -110,6 +111,9 @@ keyboard.modules.append(cg_swap)
 holdtap = HoldTap()
 keyboard.modules.append(holdtap)
 
+# NOTE: For some reason Split needs to added after HoldTap
+keyboard.modules.append(split)
+
 # Encoder
 encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
@@ -128,7 +132,6 @@ REC_PLY = KC.PLAY_SEQUENCE()
 # Cleaner key names
 _______ = KC.TRNS
 XXXXXXX = KC.NO
-TBD_KEY = KC.NO # This key will be removed next hardware update.
 
 DFT_L = KC.TO(0)                    # Default Layer: set default layer. 
 DFT_LS = KC.HT(KC.TO(0), KC.LSFT)   # Default Layer&Shift: Shift when pressed, and set default layer when tapped.
@@ -163,50 +166,49 @@ ENC_LB1 = KC.RGB_VAD        # Encoder Left Button
 ENC_RB0 = KC.RGB_HUI        # Encoder Right Button
 
 # TODO: Update the 'ENC` encoder keys
-# TODO: Delete and clean anything related to TBD_KEY
 # TODO: The KC.CG_TOGG is temporary. I should move it to the config layer
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
         KYP_LC,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
-        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPACE,TBD_KEY, ENC_LB0,             ENC_RB0, TBD_KEY, ARW_LE,  RSE_L,    KC.RALT, FUC_L,
+        KC.LGUI,   KC.LCTL, LRS_LS,  KC.SPACE,ENC_LB0,                      ENC_RB0, ARW_LE,  RSE_L,    KC.RALT, FUC_L,
     ],
     [ # LOWER LAYER
         _______,   KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,               KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, DFT_LS,  _______, TBD_KEY, ENC_LB1,             ENC_RB0, TBD_KEY, _______, RD_LL,    _______, _______,
+        _______,   _______, DFT_LS,  _______, ENC_LB1,                      ENC_RB0, _______, RD_LL,    _______, _______,
     ],
     [ # RAISE LAYER
         KC.TILD,   KC.EXLM, KC.AT,   KC.HASH, KC.DLR,  KC.PERC,             KC.CIRC, KC.AMPR, KC.ASTR, KC.LPRN,  KC.RPRN, _______,\
         _______,   _______, _______, RECORD,  REC_STP, REC_PLY,             KC.MINS, KC.EQL,  KC.LBRC, KC.RBRC,  KC.BSLS, KC.GRV,\
         _______,   _______, _______, _______, _______, _______,             KC.UNDS, KC.PLUS, KC.LCBR, KC.RCBR,  KC.PIPE, KC.TILD,\
-        _______,   _______, CFG_L,   _______, TBD_KEY, KC.CG_TOGG,          ENC_RB0, TBD_KEY, _______, XXXXXXX,  _______, _______,
+        _______,   _______, CFG_L,   _______, KC.CG_TOGG,                   ENC_RB0, _______, XXXXXXX,  _______, _______,
     ],
     [ # CONFIG LAYER
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, RGB_HI,  RGB_SI,  RGB_BI,  _______,             RGB_PFX, RGB_BFX, RGB_RFX, RGB_KFX,  RGB_SFX, _______,\
         _______,   _______, RGB_HD,  RGB_SD,  RGB_BD,  RGB_TG,              RGB_TG,  _______, _______, _______,  _______, _______,\
-        _______,   _______, XXXXXXX, _______, TBD_KEY, KC.CG_TOGG,          _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, XXXXXXX, _______, KC.CG_TOGG,                   _______, _______, _______, _______,  _______, _______,\
     ],
     [ # FUNCTION LAYER
         _______,   KC.F1,   KC.F2,   KC.F3,   KC.F4,   KC.F5,               KC.F6,   KC.F7,   KC.F8,   KC.F9,    KC.F10,  _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
-        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, _______, _______,                      _______, _______, _______,  _______, _______,\
     ],
     [ # ARROW LAYER, NOTE: This might replace the LOWER layer
         _______,    KC.N1,   KC.N2,   KC.N3,   KC.N4,   KC.N5,              KC.N6,   KC.N7,   KC.N8,   KC.N9,    KC.N0,   _______,\
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             ALT_L,   ALT_D,   ALT_U,   ALT_R,    _______, _______,\
-        _______,   _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______, _______,\
+        _______,   _______, _______, _______, _______,                      _______, _______, _______,  _______, _______,\
     ],
     [ # KEYPAD LAYER
         _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, _______,\
         _______,   _______, _______, _______, _______, _______,             KC.N4,   KC.N5,   KC.N6,   XXXXXXX,  XXXXXXX, XXXXXXX,\
         _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   KC.DOT,   XXXXXXX, XXXXXXX,\
-        _______,   _______, _______, _______, _______, _______,             XXXXXXX, XXXXXXX, XXXXXXX, KC.N0,    XXXXXXX, XXXXXXX,\
+        _______,   _______, _______, _______, _______,                      XXXXXXX, XXXXXXX, KC.N0,    XXXXXXX, XXXXXXX,\
     ]
 ]
 
