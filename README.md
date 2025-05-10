@@ -1,6 +1,6 @@
 # Keybear
 
-[Keybear 3D Model](./assets/keybear_3D_v0.6.0.png)
+![Keybear 3D Model](./assets/keybear_3D_v0.6.0.png)
 
 ## Directory Structure
 
