@@ -3,6 +3,10 @@ import board
 from kmk.kmk_keyboard import KMKKeyboard as _KMKKeyboard
 from kmk.scanners import DiodeOrientation
 
+# TODO: Rotary encoder to work in both sides of the keyboard
+# from kmk.scanners.keypad import MatrixScanner
+# from kmk.scanners.encoder import RotaryioEncoder
+
 class KMKKeyboard(_KMKKeyboard):
     col_pins = (board.GP29, board.GP28, board.GP27, board.GP26, board.GP22, board.GP20,)
     row_pins = (board.GP04, board.GP05, board.GP06, board.GP07,)
