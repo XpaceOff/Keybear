@@ -12,5 +12,3 @@
     - plasticity_archive: old versions of the plasticity file.
     - keybear-choco_case_slim.plasticity: Latest plasticity file.
 - kicad_footprints: footprints used in my kicad projects.
-
-loyalty trust and peysion

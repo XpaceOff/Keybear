@@ -12,13 +12,16 @@ from kmk.extensions.lock_status import LockStatus
 from kmk.modules.mouse_keys import MouseKeys
 
 # Some local variables
-n_key_layer = 13
-n_key_cgui = 21
-n_key_capslock = 26
-rec_max_time = 60 * 1000 # 1 minute
+n_key_layer = 13          # LED position of the Layer key
+n_key_cgui = 21           # LED position of the GUI/Windows key
+n_key_capslock = 26       # LED position of the Capslock key 
+rec_max_time = 60 * 1000  # Record max time (1 minute)
 cgui_hue_vals = [220, 15] # Hue values when cgswap is disabled/enabled [win/lin, mac]
 
 keyboard = KMKKeyboard()
+
+# Debug Mode
+keyboard.debug_enabled = False
 
 # TODO: Comment one of these on each side
 # split_side = SplitSide.LEFT
@@ -40,18 +43,16 @@ rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=28, hue_default=190, val_
 keyboard.extensions.append(rgb)
 
 class Layers(_Layers):
-    first_boot = True
-    last_top_layer = 0
+    first_boot = True # True when keyboard first boot
+    last_top_layer = 0 # Stores the last active layer
     hues = (10, 20, 69, 100, 180, 250, 35)
 
     def after_hid_send(self, keyboard):
         # In the LOWER layer, I have numbers and arrow keys.
-        # When LOWER layer is selected, I would like go back to the DEFAULT layer
-        # ~~ if a non-number or arrow key is pressed ~~
-        # if a-z or ENTER
+        # When LOWER layer is selected, I would like go back 
+        # to the DEFAULT layer if a-z or ENTER keys are pressed
         if keyboard.active_layers[0] == 1:
             for nkey in keyboard.keys_pressed:
-                # if not ((nkey.code >= 30 and nkey.code <= 39) or (nkey.code >= 79 and nkey.code <= 82)):
                 if nkey.code >= 4 and nkey.code <= 29 or nkey.code == 40:
                     # This is the code for KC.TO(layer)
                     self._active_combo = None
@@ -59,6 +60,8 @@ class Layers(_Layers):
                     keyboard.active_layers.insert(0, 0)
                     break
 
+        # This is the code that updates the color of the "layer button"
+        # This code will be executed when the active layer changes OR when the keyboard first boots up
         if keyboard.active_layers[0] != self.last_top_layer or self.first_boot:
             self.first_boot = False
             self.last_top_layer = keyboard.active_layers[0]
@@ -69,7 +72,7 @@ keyboard.modules.append(Layers())
 
 # React to Lock Status
 class LEDLockStatus(LockStatus):
-    first_boot = True
+    first_boot = True # True when keyboard first boot
     def set_lock_leds(self):
         if self.get_caps_lock():
             rgb.set_hsv(100, 255, rgb.val, n_key_capslock)
@@ -97,7 +100,7 @@ class CgSwap(_CgSwap):
         if self.last_swap_state != self.cg_swap_enable or self.first_boot:
             self.last_swap_state = self.cg_swap_enable
             self.first_boot = False
- 
+
             this_hue = cgui_hue_vals[0]
             if self.cg_swap_enable == True:
                 this_hue = cgui_hue_vals[1]
