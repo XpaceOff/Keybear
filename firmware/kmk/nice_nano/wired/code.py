@@ -2,7 +2,7 @@ from kb import KMKKeyboard
 
 from kmk.keys import KC
 from kmk.modules.layers import Layers as _Layers
-from kmk.modules.holdtap import HoldTap, HoldTapRepeat
+from kmk.modules.holdtap import HoldTap
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
 from kmk.modules.cg_swap import CgSwap as _CgSwap
@@ -118,9 +118,7 @@ encoder_handler = EncoderHandler()
 encoder_handler.pins = ((keyboard.encoder_pin_a, keyboard.encoder_pin_b, None, False),)
 
 # Dynamic Sequences (macro recording)
-dynamicSequences = DynamicSequences(
-    timeout=rec_max_time,
-)
+dynamicSequences = DynamicSequences(timeout=rec_max_time)
 keyboard.modules.append(dynamicSequences)
 RECORD  = KC.RECORD_SEQUENCE()
 REC_STP = KC.STOP_SEQUENCE()
@@ -215,4 +213,10 @@ encoder_handler.map = (
 keyboard.modules.append(encoder_handler)
 
 if __name__ == '__main__':
+
+    # Compact the heap before go(). The nice!nano's small heap fragments during
+    # setup, so the first allocation can fail despite free bytes being available.
+    import gc
+    gc.collect()
+
     keyboard.go(hid_type=HIDModes.USB)
