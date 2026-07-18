@@ -1,3 +1,4 @@
+import gc
 from kb import KMKKeyboard
 
 from kmk.keys import KC
@@ -11,6 +12,7 @@ from kmk.extensions.rgb import RGB
 from kmk.extensions.lock_status import LockStatus
 from kmk.modules.mouse_keys import MouseKeys
 from kmk.hid import HIDModes
+from kmk.extensions import Extension
 
 # Some local variables
 n_key_layer    = 13          # LED position of the Layer key
@@ -28,9 +30,9 @@ keyboard.debug_enabled = False
 # The nice!nano has dedicated hardware UART on RX/TX so use_pio is NOT needed
 # (unlike the BLOK which required use_pio=True for non-standard pins).
 split = Split(
-    split_flip=True,          # Both halves share the same PCB, just flipped
+    split_flip=True,                # Both halves share the same PCB, just flipped
     split_type=SplitType.UART,
-    split_target_left=True,   # Left half connects to USB
+    split_target_left=True,         # Left half connects to USB
     uart_interval=20,
     data_pin=keyboard.data_pin,     # RX — receives from secondary
     data_pin2=keyboard.data_pin_tx, # TX — sends to secondary
@@ -138,7 +140,6 @@ RD_LL  = KC.HT(KC.TO(0),  KC.MO(2))
 CFG_L  = KC.MO(3)
 FUC_L  = KC.MO(4)
 ARW_LE = KC.HT(KC.ENTER,  KC.MO(5))
-KYP_LC = KC.HT(KC.CAPS,   KC.MO(6))
 
 ALT_L = KC.RALT(KC.LEFT)
 ALT_R = KC.RALT(KC.RIGHT)
@@ -165,7 +166,7 @@ ENC_RB0 = KC.RGB_HUI
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
-        KYP_LC,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
+        KC.CAPS,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
                    KC.LGUI, KC.LCTL, LRS_LS,  KC.SPACE,ENC_LB0,             ENC_RB0, ARW_LE,  RSE_L,   KC.RALT,  FUC_L,
     ],
@@ -198,12 +199,6 @@ keyboard.keymap = [
         _______,   _______, _______, _______, _______, _______,             KC.LEFT, KC.DOWN, KC.UP,   KC.RIGHT, _______, _______,\
         _______,   _______, _______, _______, _______, _______,             ALT_L,   ALT_D,   ALT_U,   ALT_R,    _______, _______,\
                    _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______,
-    ],
-    [ # KEYPAD LAYER
-        _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, _______,\
-        _______,   _______, _______, _______, _______, _______,             KC.N4,   KC.N5,   KC.N6,   XXXXXXX,  XXXXXXX, XXXXXXX,\
-        _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   KC.DOT,   XXXXXXX, XXXXXXX,\
-                   _______, _______, _______, _______, _______,             XXXXXXX, XXXXXXX, KC.N0,   XXXXXXX,  XXXXXXX,
     ]
 ]
 
@@ -212,11 +207,16 @@ encoder_handler.map = (
 )
 keyboard.modules.append(encoder_handler)
 
+class GCCollect(Extension):
+    def during_bootup(self, keyboard):
+        gc.collect()
+
+keyboard.extensions.append(GCCollect())
+
 if __name__ == '__main__':
 
     # Compact the heap before go(). The nice!nano's small heap fragments during
     # setup, so the first allocation can fail despite free bytes being available.
-    import gc
     gc.collect()
 
     keyboard.go(hid_type=HIDModes.USB)
