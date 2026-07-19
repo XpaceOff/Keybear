@@ -5,3 +5,10 @@ fp-info-cache
 *.*.lck
 _autosave*
 *.wrl
+
+# Python
+__pycache__/
+*.mpy
+
+# kicad
+.history/
