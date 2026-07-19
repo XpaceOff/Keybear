@@ -2,7 +2,7 @@ from kb import KMKKeyboard
 
 from kmk.keys import KC
 from kmk.modules.layers import Layers as _Layers
-from kmk.modules.holdtap import HoldTap, HoldTapRepeat
+from kmk.modules.holdtap import HoldTap
 from kmk.modules.split import Split, SplitSide, SplitType
 from kmk.modules.encoder import EncoderHandler
 from kmk.modules.cg_swap import CgSwap as _CgSwap
@@ -27,14 +27,14 @@ keyboard.debug_enabled = False
 # split_side = SplitSide.LEFT
 # split_side = SplitSide.RIGHT
 split = Split(
-    split_flip=True, # If both halves are the same, but flipped, set this True
-    # split_side=split_side, # Sets if this is to SplitSide.LEFT or SplitSide.RIGHT, or use EE hands
-    split_type=SplitType.UART, # Defaults to UART
-    split_target_left=True,  # Assumes that left will be the one on USB. Set to False if it will be the right
-    uart_interval=20, # Sets the uarts delay. Lower numbers draw more power
-    data_pin=keyboard.data_pin_rx, # The primary data pin to talk to the secondary device with
+    split_flip=True,                # If both halves are the same, but flipped, set this True
+    # split_side=split_side,        # Sets if this is to SplitSide.LEFT or SplitSide.RIGHT, or use EE hands
+    split_type=SplitType.UART,      # Defaults to UART
+    split_target_left=True,         # Assumes that left will be the one on USB. Set to False if it will be the right
+    uart_interval=20,               # Sets the uarts delay. Lower numbers draw more power
+    data_pin=keyboard.data_pin_rx,  # The primary data pin to talk to the secondary device with
     data_pin2=keyboard.data_pin_tx, # Second uart pin to allow 2 way communication
-    uart_flip=True, # Reverses the RX and TX pins if both are provided
+    uart_flip=True,                 # Reverses the RX and TX pins if both are provided
     use_pio=True,
 )
 
@@ -43,7 +43,7 @@ rgb = RGB(pixel_pin=keyboard.rgb_pixel_pin, num_pixels=28, hue_default=190, val_
 keyboard.extensions.append(rgb)
 
 class Layers(_Layers):
-    first_boot = True # True when keyboard first boot
+    first_boot = True  # True when keyboard first boot
     last_top_layer = 0 # Stores the last active layer
     hues = (10, 20, 69, 100, 180, 250, 35)
 
@@ -147,7 +147,6 @@ RD_LL = KC.HT(KC.TO(0), KC.MO(2))   # Raise & Default Layers: Set default layer 
 CFG_L = KC.MO(3)                    # Config Layer: set config layer when pressed.
 FUC_L = KC.MO(4)                    # Function Layer: set function layer when pressed
 ARW_LE = KC.HT(KC.ENTER, KC.MO(5))
-KYP_LC = KC.HT(KC.CAPS, KC.MO(6))
 
 ALT_L = KC.RALT(KC.LEFT)
 ALT_R = KC.RALT(KC.RIGHT)
@@ -176,7 +175,7 @@ ENC_RB0 = KC.RGB_HUI        # Encoder Right Button
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
-        KYP_LC,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
+        KC.CAPS,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
                    KC.LGUI, KC.LCTL, LRS_LS,  KC.SPACE,ENC_LB0,             ENC_RB0, ARW_LE,  RSE_L,   KC.RALT,  FUC_L,
     ],
@@ -196,7 +195,7 @@ keyboard.keymap = [
         _______,   _______, _______, _______, KC.RESET,_______,             _______, _______, _______, _______,  _______, _______,\
         _______,   _______, _______, RGB_SI,  RGB_HI,  RGB_BI,              RGB_PFX, RGB_BFX, RGB_RFX, RGB_KFX,  RGB_SFX, _______,\
         _______,   _______, _______, RGB_SD,  RGB_HD,  RGB_BD,              RGB_TG,  _______, _______, _______,  _______, _______,\
-                   _______, _______, XXXXXXX, _______, KC.CG_TOGG,          _______, _______, _______, _______,  _______,\
+                   _______, _______, XXXXXXX, _______, KC.CG_TOGG,          _______, _______, _______, _______,  _______,
     ],
     [ # FUNCTION LAYER
         _______,   KC.F1,   KC.F2,   KC.F3,   KC.F4,   KC.F5,               KC.F6,   KC.F7,   KC.F8,   KC.F9,    KC.F10,  KC.DELETE,\
@@ -210,12 +209,6 @@ keyboard.keymap = [
         _______,   _______, _______, _______, _______, _______,             ALT_L,   ALT_D,   ALT_U,   ALT_R,    _______, _______,\
                    _______, _______, _______, _______, _______,             _______, _______, _______, _______,  _______,\
     ],
-    [ # KEYPAD LAYER
-        _______,   _______, _______, _______, _______, _______,             KC.N7,   KC.N8,   KC.N9,   XXXXXXX,  XXXXXXX, _______,\
-        _______,   _______, _______, _______, _______, _______,             KC.N4,   KC.N5,   KC.N6,   XXXXXXX,  XXXXXXX, XXXXXXX,\
-        _______,   _______, _______, _______, _______, _______,             KC.N1,   KC.N2,   KC.N3,   KC.DOT,   XXXXXXX, XXXXXXX,\
-                   _______, _______, _______, _______, _______,             XXXXXXX, XXXXXXX, KC.N0,   XXXXXXX,  XXXXXXX,\
-    ]
 ]
 
 encoder_handler.map = (

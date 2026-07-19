@@ -7,9 +7,6 @@ from kmk.scanners import DiodeOrientation
 
 class KMKKeyboard(_KMKKeyboard):
     # -----------------------------------------------------------------------
-    # Matrix — same physical PCB as the BLOK version, mapped via Pro Micro
-    # pinout indices so the same board works with nice!nano v2.
-    #
     # Index reference (nice_nano quickpin):
     #   idx  6 = P0_22   idx  7 = P0_24   idx  8 = P1_00   idx  9 = P0_11
     #   idx 14 = P1_11   idx 15 = P1_13   idx 16 = P1_15   idx 17 = P0_02

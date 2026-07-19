@@ -51,7 +51,7 @@ class Layers(_Layers):
     hues = (10, 20, 69, 100, 180, 250, 35)
 
     def after_hid_send(self, keyboard):
-        # In the LOWER layer, pressing a-z or ENTER returns to DEFAULT
+        # In the LOWER layer, pressing a-z or ENTER switches back to the DEFAULT layer.
         if keyboard.active_layers[0] == 1:
             for nkey in keyboard.keys_pressed:
                 if nkey.code >= 4 and nkey.code <= 29 or nkey.code == 40:
@@ -60,7 +60,7 @@ class Layers(_Layers):
                     keyboard.active_layers.insert(0, 0)
                     break
 
-        # Update the Layer key LED colour when the active layer changes
+        # Update the Layer key LED color when the active layer changes
         if keyboard.active_layers[0] != self.last_top_layer or self.first_boot:
             self.first_boot       = False
             self.last_top_layer   = keyboard.active_layers[0]
@@ -71,6 +71,7 @@ class Layers(_Layers):
 keyboard.modules.append(Layers())
 
 
+# React to Lock Status
 class LEDLockStatus(LockStatus):
     first_boot = True
 
@@ -146,13 +147,13 @@ ALT_R = KC.RALT(KC.RIGHT)
 ALT_U = KC.RALT(KC.UP)
 ALT_D = KC.RALT(KC.DOWN)
 
-RGB_TG  = KC.RGB_TOG
-RGB_BI  = KC.RGB_VAI
-RGB_BD  = KC.RGB_VAD
-RGB_SI  = KC.RGB_SAI
-RGB_SD  = KC.RGB_SAD
-RGB_HI  = KC.RGB_HUI
-RGB_HD  = KC.RGB_HUD
+RGB_TG = KC.RGB_TOG # Turn ON/OFF RGB.
+RGB_BI = KC.RGB_VAI # + Brightness
+RGB_BD = KC.RGB_VAD # - Brightness
+RGB_SI = KC.RGB_SAI # + Saturation
+RGB_SD = KC.RGB_SAD # - Saturation
+RGB_HI = KC.RGB_HUI # + Hue
+RGB_HD = KC.RGB_HUD # - Hue
 RGB_PFX = KC.RGB_MODE_PLAIN
 RGB_BFX = KC.RGB_MODE_BREATHE
 RGB_RFX = KC.RGB_MODE_RAINBOW
@@ -166,7 +167,7 @@ ENC_RB0 = KC.RGB_HUI
 keyboard.keymap = [
     [ # DEFAULT LAYER
         KC.TAB,    KC.Q,    KC.W,    KC.E,    KC.R,    KC.T,                KC.Y,    KC.U,    KC.I,    KC.O,     KC.P,    KC.BSPC,\
-        KC.CAPS,    KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
+        KC.CAPS,   KC.A,    KC.S,    KC.D,    KC.F,    KC.G,                KC.H,    KC.J,    KC.K,    KC.L,     KC.SCLN, KC.QUOT,\
         KC.LSFT,   KC.Z,    KC.X,    KC.C,    KC.V,    KC.B,                KC.N,    KC.M,    KC.COMM, KC.DOT,   KC.SLSH, KC.ESC,\
                    KC.LGUI, KC.LCTL, LRS_LS,  KC.SPACE,ENC_LB0,             ENC_RB0, ARW_LE,  RSE_L,   KC.RALT,  FUC_L,
     ],
@@ -207,6 +208,8 @@ encoder_handler.map = (
 )
 keyboard.modules.append(encoder_handler)
 
+# Extension to run gc.collect() during bootup. This is needed because the 
+# nice!nano's small heap fragments during setup, so the first allocation can fail despite free bytes being available.
 class GCCollect(Extension):
     def during_bootup(self, keyboard):
         gc.collect()
