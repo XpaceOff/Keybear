@@ -1,16 +1,16 @@
 # Keybear — nice!nano v2 Wired Setup
 
-This folder contains KMK firmware files for the Keybear keyboard using two **nice!nano v2** controllers connected via a **TRRS cable** (wired UART split). The keyboard connects to your PC over USB-C.
+This folder contains KMK firmware files for the Keybear keyboard using two **nice!nano v2** controllers connected via a **USB cable** (wired UART split). This is a custom feature of the Keybear PCB design — the inter-half USB connector replaces the TRRS jack found on most split keyboards. The keyboard connects to your PC over USB-C.
 
 ---
 
 ## Requirements
 
 - 2× nice!nano v2
-- 1× TRRS cable (3.5 mm, 4-pole)
+- 1× USB cable for the split connection between the two halves (custom PCB connector)
 - CircuitPython **8.x or higher** (nRF52840 build)
 - KMK firmware (must be **pre-compiled** — see below)
-- USB-C cable
+- USB-C cable (to connect left half to PC)
 
 ---
 
@@ -34,18 +34,13 @@ This folder contains KMK firmware files for the Keybear keyboard using two **nic
 
 KMK detects which half is left or right by reading the drive name. The left drive name must end in `L` and the right in `R`.
 
-Open a serial console (e.g. Thonny, `screen`, or PuTTY) connected to each half and run:
+With the nice!nano connected via USB, the `CIRCUITPY` drive will appear in your file manager. Rename it directly from your OS:
 
-```python
-import storage
-storage.remount("/", readonly=False)
-import os
-os.rename("/", "KEYBEARL")   # on the left half
-# os.rename("/", "KEYBEARR") # on the right half
-```
+- **Windows:** right-click the drive in Explorer → **Rename** → type `KEYBEAR_L` (left) or `KEYBEAR_R` (right).
+- **macOS:** click the drive on the Desktop or in Finder → press **Return** → type the new name.
+- **Linux:** rename via your file manager or with `mlabel` / `udisksctl`.
 
-Or follow the official CircuitPython guide:  
-https://learn.adafruit.com/welcome-to-circuitpython/renaming-circuitpy
+Repeat for the second half with the opposite name.
 
 ---
 
@@ -113,7 +108,21 @@ The nice!nano has limited flash memory. KMK must be compiled to `.mpy` bytecode 
 
 ---
 
-## Step 4 — Copy files to each half
+## Step 4 — Compile the custom neopixel driver
+
+This firmware uses a custom minimal `neopixel.py` (found in this folder) instead of the full Adafruit library, which saves significant flash space. It must be compiled to `.mpy` before copying.
+
+From this folder, run:
+
+```sh
+mpy-cross neopixel.py
+```
+
+This produces `neopixel.mpy` in the same folder. Copy **only** the `.mpy` file to the board (not the `.py` source).
+
+---
+
+## Step 5 — Copy files to each half
 
 Copy the following to the **root** of both `KEYBEARL` and `KEYBEARR` drives:
 
@@ -121,6 +130,7 @@ Copy the following to the **root** of both `KEYBEARL` and `KEYBEARR` drives:
 KEYBEARL/  (and KEYBEARR/)
 ├── boot.py        ← from KMK repo root
 ├── kmk/           ← compiled KMK folder in `build/` (from Step 3)
+├── neopixel.mpy   ← compiled in Step 4
 ├── kb.py          ← from this folder
 └── code.py        ← from this folder
 ```
@@ -130,10 +140,9 @@ https://github.com/KMKfw/kmk_firmware/blob/main/boot.py
 
 ---
 
-## Step 5 — Connect the TRRS cable and plug in USB
+## Step 6 — Connect the split cable and plug in USB
 
-1. **With both halves powered off**, connect the TRRS cable between the two halves.  
-   ⚠️ Always connect/disconnect TRRS while the keyboard is unplugged to avoid shorting the UART pins.
+1. Connect the USB cable between the two halves using the inter-half connector on the PCB.
 
 2. Plug the USB-C cable into the **left half** (the split target).
 
@@ -171,7 +180,8 @@ These indices match the `nice_nano` quickpin table in KMK:
 | Symptom | Fix |
 |---|---|
 | `CIRCUITPY` fills up / import error | KMK was not pre-compiled. Repeat Step 3. |
-| Only one half works | Check TRRS cable is seated. Plug USB into the **left** half. |
+| `neopixel` import error | `neopixel.mpy` is missing. Repeat Step 4 and copy it to the drive. |
+| Only one half works | Check the inter-half USB cable is seated. Plug the PC cable into the **left** half. |
 | Wrong half is master | Rename drives so left ends in `L`, right in `R`. |
 | Keys wrong side | Swap the drive names (`L`/`R`). |
 | Keyboard not detected | Check `boot.py` is present at root of the drive. |
