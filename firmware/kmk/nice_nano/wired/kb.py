@@ -23,7 +23,7 @@ class KMKKeyboard(_KMKKeyboard):
     # RGB underglow / per-key
     rgb_pixel_pin = pins[12]   # P0_09
 
-    # Wired UART split (TRRS cable)  — hardware UART pins, no PIO needed
+    # Wired UART split (custom inter-half USB cable) — hardware UART pins, no PIO needed
     data_pin    = board.RX     # pins[1]
     data_pin_tx = board.TX     # pins[0]
 

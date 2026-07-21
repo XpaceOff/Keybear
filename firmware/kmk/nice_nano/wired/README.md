@@ -128,15 +128,14 @@ Copy the following to the **root** of both `KEYBEARL` and `KEYBEARR` drives:
 
 ```
 KEYBEARL/  (and KEYBEARR/)
-├── boot.py        ← from KMK repo root
+├── boot.py        ← from this folder
 ├── kmk/           ← compiled KMK folder in `build/` (from Step 3)
 ├── neopixel.mpy   ← compiled in Step 4
 ├── kb.py          ← from this folder
 └── code.py        ← from this folder
 ```
 
-The `boot.py` file is found in the root of the KMK repository:  
-https://github.com/KMKfw/kmk_firmware/blob/main/boot.py
+> **Note:** The `boot.py` in this folder disables the USB mass storage drive so the keyboard does not mount as a drive every time it is plugged in. See [Accessing the drive](#accessing-the-drive) below for how to re-enable it when you need to edit files.
 
 ---
 
@@ -188,7 +187,20 @@ These indices match the `nice_nano` quickpin table in KMK:
 
 ---
 
+## Accessing the drive
+
+The `boot.py` in this firmware disables USB mass storage so the keyboard never mounts as a drive during normal use. To access the `CIRCUITPY` drive for editing files:
+
+1. While the half is **unplugged**, short the **RST pin to GND** on the nice!nano (use a wire or tweezers on the two pads).
+2. While holding that short, **double-tap RST** (or briefly connect and reconnect RST to GND twice quickly).  
+   The board enters the UF2 bootloader and mounts as `NICENANO`.
+3. From there you can re-flash CircuitPython or copy files.  
+   Alternatively, simply **remove `boot.py`** from the drive — the `CIRCUITPY` drive will appear normally on the next boot, letting you edit files as usual. Put `boot.py` back when done.
+
+---
+
 ## Updating the keymap
 
 Edit `code.py` on **both halves** (the keymap must be identical on each side).  
+To access the drive, follow the steps in [Accessing the drive](#accessing-the-drive) above.  
 After saving, CircuitPython auto-reloads — no reflashing needed.

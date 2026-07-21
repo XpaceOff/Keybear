@@ -26,7 +26,7 @@ keyboard = KMKKeyboard()
 # Debug Mode
 keyboard.debug_enabled = False
 
-# Wired UART split over TRRS cable.
+# Wired UART split over a custom inter-half USB cable.
 # The nice!nano has dedicated hardware UART on RX/TX so use_pio is NOT needed
 # (unlike the BLOK which required use_pio=True for non-standard pins).
 split = Split(
@@ -36,7 +36,7 @@ split = Split(
     uart_interval=20,
     data_pin=keyboard.data_pin,     # RX — receives from secondary
     data_pin2=keyboard.data_pin_tx, # TX — sends to secondary
-    uart_flip=True,                 # RX/TX are mirrored across the TRRS cable
+    uart_flip=True,                 # RX/TX are mirrored across the inter-half cable
     use_pio=False,                  # Hardware UART; no PIO required on nRF52840
 )
 
